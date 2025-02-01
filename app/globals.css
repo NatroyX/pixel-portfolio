@@ -1,0 +1,278 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 142.1 76.2% 36.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 142.1 70.6% 45.3%;
+    --primary-foreground: 144.9 80.4% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 142.4 71.8% 29.2%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Pixelify Sans", sans-serif;
+  }
+}
+
+@layer utilities {
+  .pixel-borders {
+    @apply border-2 border-primary rounded-lg;
+    box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--primary)), 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .pixel-text {
+    @apply font-bold tracking-wide;
+  }
+
+  .pixel-hover {
+    @apply transition-all duration-200 hover:scale-105 hover:shadow-lg active:scale-95;
+  }
+
+  .glass-effect {
+    @apply bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60;
+  }
+
+  .pixelated {
+    image-rendering: pixelated;
+  }
+
+  .pixel-glow {
+    text-shadow: 0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary));
+  }
+
+  .pixel-bg {
+    background-image: linear-gradient(to right, hsl(var(--primary) / 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary) / 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .pixel-card {
+    @apply bg-card text-card-foreground p-6 rounded-lg pixel-borders;
+  }
+
+  .pixel-button {
+    @apply px-4 py-2 rounded-lg pixel-borders pixel-hover bg-primary text-primary-foreground font-bold;
+  }
+
+  .pixel-input {
+    @apply px-4 py-2 rounded-lg pixel-borders bg-background text-foreground;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .pixel-gradient {
+    background: linear-gradient(45deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+  }
+
+  .retro-shadow {
+    box-shadow: 0.5rem 0.5rem 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .pixel-pattern {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .neon-glow {
+    text-shadow: 0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary)), 0 0 15px hsl(var(--primary));
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  .pulse-animation {
+    animation: pulse 2s infinite;
+  }
+
+  .pixel-shadow {
+    box-shadow: 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .pixel-border-animated {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pixel-border-animated::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: repeating-linear-gradient(
+      45deg,
+      hsl(var(--primary)),
+      hsl(var(--primary)) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+    z-index: -1;
+    animation: border-animation 20s linear infinite;
+  }
+
+  @keyframes border-animation {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 400px 0;
+    }
+  }
+
+  .pixel-scanlines {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pixel-scanlines::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.05) 50%);
+    background-size: 100% 4px;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .pixel-glitch {
+    animation: glitch 1s infinite;
+  }
+
+  @keyframes glitch {
+    0% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translate(-2px, 2px);
+    }
+    40% {
+      transform: translate(-2px, -2px);
+    }
+    60% {
+      transform: translate(2px, 2px);
+    }
+    80% {
+      transform: translate(2px, -2px);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
+
+  .pixel-cursor {
+    position: relative;
+  }
+
+  .pixel-cursor::after {
+    content: "|";
+    position: absolute;
+    right: -0.5em;
+    animation: blink 0.7s infinite;
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .bg-grid-small-primary {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, hsl(var(--primary) / 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary) / 0.1) 1px, transparent 1px);
+  }
+
+  @keyframes pixel-border {
+    0% {
+      background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+    }
+    100% {
+      background-position: 100% 0, 100% 100%, 0 100%, 0 0;
+    }
+  }
+
+  .animate-pixel-border {
+    background-image: linear-gradient(90deg, hsl(var(--primary)) 50%, transparent 50%),
+      linear-gradient(90deg, hsl(var(--primary)) 50%, transparent 50%),
+      linear-gradient(0deg, hsl(var(--primary)) 50%, transparent 50%),
+      linear-gradient(0deg, hsl(var(--primary)) 50%, transparent 50%);
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size: 16px 4px, 16px 4px, 4px 16px, 4px 16px;
+    background-position: 0 0, 100% 100%, 0 100%, 100% 0;
+    animation: pixel-border 0.5s infinite linear;
+  }
+}
+
